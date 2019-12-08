@@ -16,7 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class CalculatriceVue extends Application
+public class CalculatriceVue
 {
 	//Conteneurs
 	private VBox superConteneur;
@@ -48,7 +48,6 @@ public class CalculatriceVue extends Application
 	private Label affichage;
 	
 
-	@Override
 	public void start(Stage primaryStage) throws Exception 
 	{
 		// Initialisation des conteneurs
