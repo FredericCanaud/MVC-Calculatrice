@@ -1,5 +1,9 @@
 package application;
 
+import controler.CalculatriceControleur;
+import model.CalculatriceModele;
+import view.CalculatriceVue;
+
 public class CalculatriceMVC {
 	
 	public static void main(String[] args) {

@@ -1,4 +1,7 @@
-package application;
+package controler;
+
+import model.CalculatriceModele;
+import view.CalculatriceVue;
 
 public class CalculatriceControleur {
 	

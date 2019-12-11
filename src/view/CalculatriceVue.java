@@ -1,10 +1,13 @@
-package application;
+package view;
 
+import controler.ButtonHandler;
 import javafx.application.Application;
-import javafx.geometry.Insets;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -16,14 +19,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class CalculatriceVue
+public class CalculatriceVue extends Application
 {
 	//Conteneurs
 	private VBox superConteneur;
 	private HBox resultat;
 	private HBox conteneurBouton;
-	private GridPane bouton;
-	private VBox boutonCalcul;
+	private GridPane boutons;
+	private VBox boutonOperation;
 	
 	//Boutons
 	private Button un;
@@ -48,20 +51,33 @@ public class CalculatriceVue
 	private Label affichage;
 	
 
-	public void start(Stage primaryStage) throws Exception 
-	{
+	public void start(Stage primaryStage) throws Exception {
+		
+		initialisation();
+		
+		positionning();
+		
+		Scene scene = new Scene(this.superConteneur,400,500);
+		primaryStage.setScene(scene);
+		primaryStage.setTitle("Calculatrice");
+		primaryStage.show();
+	}
+	
+	private void initialisation() {
+		
 		// Initialisation des conteneurs
 		this.superConteneur=new VBox();
 		this.conteneurBouton=new HBox();
 		this.resultat=new HBox();
-		this.bouton=new GridPane();
-		this.boutonCalcul=new VBox();
+		this.boutons=new GridPane();
+		this.boutonOperation=new VBox();
 		
 		//Initialisation affichage
 		this.affichage=new Label("");
 		
 		// Initialisation des boutons
 		this.un=new Button("1");
+		un.setOnMouseClicked(new ButtonHandler(un, affichage));
 		this.deux=new Button("2");
 		this.trois=new Button("3");
 		this.quatre=new Button("4");
@@ -78,33 +94,42 @@ public class CalculatriceVue
 		this.soustraction=new Button("-");
 		this.multiplication=new Button("*");
 		this.division=new Button("/");
+	}
+	
+	private void positionning() {
 		
 		resultat.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		resultat.setPrefSize(300, 75);
-		bouton.setPrefSize(500,400);
+		
+		boutons.setPrefSize(300,400);
+		boutons.setAlignment(Pos.CENTER);
+		
+		boutonOperation.setPrefSize(100,425);
+		boutonOperation.setSpacing(12.0);
+		boutonOperation.setAlignment(Pos.CENTER);
 
 		//Grille des boutons
-		bouton.add(un, 0, 0);
-		bouton.add(deux, 1, 0);
-		bouton.add(trois, 2, 0);
-		bouton.add(quatre, 0, 1);
-		bouton.add(cinq, 1, 1);
-		bouton.add(six, 2, 1);
-		bouton.add(sept, 0, 2);
-		bouton.add(huit, 1, 2);
-		bouton.add(neuf, 2, 2);
-		bouton.add(zero,0,3);
-		bouton.add(virgule, 1, 3);
-		bouton.add(egale, 2, 3);
+		boutons.add(un, 0, 0);  // A extraire en méthode mais un peu chiant
+		boutons.add(deux, 1, 0);
+		boutons.add(trois, 2, 0);
+		boutons.add(quatre, 0, 1);
+		boutons.add(cinq, 1, 1);
+		boutons.add(six, 2, 1);
+		boutons.add(sept, 0, 2);
+		boutons.add(huit, 1, 2);
+		boutons.add(neuf, 2, 2);
+		boutons.add(zero,0,3);
+		boutons.add(virgule, 1, 3);
+		boutons.add(egale, 2, 3);
 		
 		resultat.getChildren().add(affichage);
-		boutonCalcul.getChildren().addAll(annule,addition,soustraction,multiplication,division);
-		conteneurBouton.getChildren().addAll(bouton,boutonCalcul);
+		boutonOperation.getChildren().addAll(annule,addition,soustraction,multiplication,division);
+		conteneurBouton.getChildren().addAll(boutons,boutonOperation);
 
-		bouton.setHgap(20);
-		bouton.setVgap(20);
+		boutons.setHgap(20);
+		boutons.setVgap(20);
 		
-		un.setPrefSize(75,75);
+		un.setPrefSize(75,75); // À mettre sous forme de liste avec un List<Button> + décaler la liste dans modèle
 		deux.setPrefSize(75,75);
 		trois.setPrefSize(75,75);
 		quatre.setPrefSize(75,75);
@@ -117,24 +142,18 @@ public class CalculatriceVue
 		virgule.setPrefSize(75,75);
 		egale.setPrefSize(75,75);
 		
-		annule.setMinSize(75,75);
-		addition.setPrefSize(75,75);
-		soustraction.setPrefSize(75,75);
-		multiplication.setPrefSize(75,75);
-		division.setPrefSize(75,75);
+		annule.setMinSize(60,60); // La même qu'au dessus
+		addition.setPrefSize(60,60);
+		soustraction.setPrefSize(60,60);
+		multiplication.setPrefSize(60,60);
+		division.setPrefSize(60,60);
 		
 		
 		
 		superConteneur.getChildren().addAll(resultat,conteneurBouton);
-		
-		Scene scene = new Scene(this.superConteneur,400,500);
-		primaryStage.setScene(scene);
-		primaryStage.setTitle("Calculatrice");
-		primaryStage.show();
 	}
 	
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) {
 		launch(args);
 	}
 
