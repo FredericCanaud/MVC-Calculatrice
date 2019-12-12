@@ -3,13 +3,6 @@
   <groupId>MVC-Calculatrice</groupId>
   <artifactId>MVC-Calculatrice</artifactId>
   <version>0.0.1-SNAPSHOT</version>
- <dependencies>
-    	<dependency>
-     	 <groupId>org.openjfx</groupId>
-      		<artifactId>javafx-controls</artifactId>
-      		<version>11.0.2</version>
-    	</dependency>
-  	</dependencies>
     <build>
     <sourceDirectory>src</sourceDirectory>
     <resources>
