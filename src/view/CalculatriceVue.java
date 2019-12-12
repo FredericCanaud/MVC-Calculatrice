@@ -1,160 +1,146 @@
 package view;
 
-import controler.ButtonHandler;
-import javafx.application.Application;
-import javafx.event.EventHandler;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Color;
 
-public class CalculatriceVue extends Application
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class CalculatriceVue extends JFrame
 {
-	//Conteneurs
-	private VBox superConteneur;
-	private HBox resultat;
-	private HBox conteneurBouton;
-	private GridPane boutons;
-	private VBox boutonOperation;
+private static final long serialVersionUID = 1L;
 	
-	//Boutons
-	private Button un;
-	private Button deux;
-	private Button trois;
-	private Button quatre;
-	private Button cinq;
-	private Button six;
-	private Button sept;
-	private Button huit;
-	private Button neuf;
-	private Button zero;
-	private Button virgule;
-	private Button egale;
-	private Button annule;
-	private Button addition;
-	private Button soustraction;
-	private Button multiplication;
-	private Button division;
+	private JPanel superConteneur;
+	private JPanel chiffres;
+	private JPanel operateurs;
+	private JPanel panEcran;
 	
-	//Affichage
-	private Label affichage;
+	private JLabel nombreAffiche;
+	private JButton zero;
+	private JButton un;
+	private JButton deux;
+	private JButton trois;
+	private JButton quatre;
+	private JButton cinq;
+	private JButton six;
+	private JButton sept;
+	private JButton huit;
+	private JButton neuf;
 	
+	
+	private JButton addition;
+	private JButton soustraction;
+	private JButton multiplication;
+	private JButton division;
+	private JButton egal;
+	private JButton annule;
+	private JButton virgule;
 
-	public void start(Stage primaryStage) throws Exception {
+	public CalculatriceVue() {
 		
-		initialisation();
-		
-		positionning();
-		
-		Scene scene = new Scene(this.superConteneur,400,500);
-		primaryStage.setScene(scene);
-		primaryStage.setTitle("Calculatrice");
-		primaryStage.show();
-	}
-	
-	private void initialisation() {
-		
-		// Initialisation des conteneurs
-		this.superConteneur=new VBox();
-		this.conteneurBouton=new HBox();
-		this.resultat=new HBox();
-		this.boutons=new GridPane();
-		this.boutonOperation=new VBox();
-		
-		//Initialisation affichage
-		this.affichage=new Label("");
-		
-		// Initialisation des boutons
-		this.un=new Button("1");
-		un.setOnMouseClicked(new ButtonHandler(un, affichage));
-		this.deux=new Button("2");
-		this.trois=new Button("3");
-		this.quatre=new Button("4");
-		this.cinq=new Button("5");
-		this.six=new Button("6");
-		this.sept=new Button("7");
-		this.huit=new Button("8");
-		this.neuf=new Button("9");
-		this.zero=new Button("0");
-		this.virgule=new Button(".");
-		this.egale=new Button("=");
-		this.annule=new Button("C");
-		this.addition=new Button("+");
-		this.soustraction=new Button("-");
-		this.multiplication=new Button("*");
-		this.division=new Button("/");
-	}
-	
-	private void positionning() {
-		
-		resultat.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		resultat.setPrefSize(300, 75);
-		
-		boutons.setPrefSize(300,400);
-		boutons.setAlignment(Pos.CENTER);
-		
-		boutonOperation.setPrefSize(100,425);
-		boutonOperation.setSpacing(12.0);
-		boutonOperation.setAlignment(Pos.CENTER);
+		this.setSize(500, 520);
+		this.setTitle("Calculatrice");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    this.setLocationRelativeTo(null);
+	    this.setResizable(false);
+	    this.setVisible(true);
 
-		//Grille des boutons
-		boutons.add(un, 0, 0);  // A extraire en méthode mais un peu chiant
-		boutons.add(deux, 1, 0);
-		boutons.add(trois, 2, 0);
-		boutons.add(quatre, 0, 1);
-		boutons.add(cinq, 1, 1);
-		boutons.add(six, 2, 1);
-		boutons.add(sept, 0, 2);
-		boutons.add(huit, 1, 2);
-		boutons.add(neuf, 2, 2);
-		boutons.add(zero,0,3);
-		boutons.add(virgule, 1, 3);
-		boutons.add(egale, 2, 3);
+	    this.superConteneur = new JPanel();
+		this.chiffres = new JPanel();
+		this.operateurs = new JPanel();
+		this.panEcran = new JPanel();
 		
-		resultat.getChildren().add(affichage);
-		boutonOperation.getChildren().addAll(annule,addition,soustraction,multiplication,division);
-		conteneurBouton.getChildren().addAll(boutons,boutonOperation);
+	    this.chiffres.setPreferredSize(new Dimension(330, 450));
+		this.operateurs.setPreferredSize(new Dimension(110, 450));
+	    this.panEcran.setPreferredSize(new Dimension(440, 60));
 
-		boutons.setHgap(20);
-		boutons.setVgap(20);
 		
-		un.setPrefSize(75,75); // À mettre sous forme de liste avec un List<Button> + décaler la liste dans modèle
-		deux.setPrefSize(75,75);
-		trois.setPrefSize(75,75);
-		quatre.setPrefSize(75,75);
-		cinq.setPrefSize(75,75);
-		six.setPrefSize(75,75);
-		sept.setPrefSize(75,75);
-		huit.setPrefSize(75,75);
-		neuf.setPrefSize(75,75);
-		zero.setPrefSize(75,75);
-		virgule.setPrefSize(75,75);
-		egale.setPrefSize(75,75);
+		nombreAffiche = new JLabel("");
+		nombreAffiche.setPreferredSize(new Dimension(125, 100));
+		nombreAffiche.setHorizontalAlignment(JLabel.RIGHT);
+		nombreAffiche.setFont(new Font("Arial", Font.BOLD, 36));
 		
-		annule.setMinSize(60,60); // La même qu'au dessus
-		addition.setPrefSize(60,60);
-		soustraction.setPrefSize(60,60);
-		multiplication.setPrefSize(60,60);
-		division.setPrefSize(60,60);
-		
-		
-		
-		superConteneur.getChildren().addAll(resultat,conteneurBouton);
-	}
+		zero = new JButton("0");
+	    zero.setPreferredSize(new Dimension(100, 80));
+
+		un = new JButton("1");
+	    un.setPreferredSize(new Dimension(100, 80));
+
+		deux = new JButton("2");
+	    deux.setPreferredSize(new Dimension(100, 80));
+
+		trois = new JButton("3");
+	    trois.setPreferredSize(new Dimension(100, 80));
+
+		quatre = new JButton("4");
+	    quatre.setPreferredSize(new Dimension(100, 80));
+
+		cinq = new JButton("5");
+	    cinq.setPreferredSize(new Dimension(100, 80));
+
+		six = new JButton("6");
+	    six.setPreferredSize(new Dimension(100, 80));
+
+		sept = new JButton("7");
+	    sept.setPreferredSize(new Dimension(100, 80));
+
+		huit = new JButton("8");
+	    huit.setPreferredSize(new Dimension(100, 80));
 	
-	public static void main(String[] args) {
-		launch(args);
-	}
+		neuf = new JButton("9");
+	    neuf.setPreferredSize(new Dimension(100, 80));
 
+	    virgule = new JButton(".");
+	    virgule.setPreferredSize(new Dimension(100, 80));
+
+		egal = new JButton("=");
+	    egal.setPreferredSize(new Dimension(100, 80));
+	    
+	    chiffres.add(un);
+	    chiffres.add(deux);
+	    chiffres.add(trois);
+	    chiffres.add(quatre);
+	    chiffres.add(cinq);
+	    chiffres.add(six);
+	    chiffres.add(sept);
+	    chiffres.add(huit);
+	    chiffres.add(neuf);
+	    chiffres.add(virgule);
+	    chiffres.add(zero);
+	    chiffres.add(egal);
+	    
+		addition = new JButton("+");
+	    addition.setPreferredSize(new Dimension(100, 62));
+
+		soustraction = new JButton("-");
+	    soustraction.setPreferredSize(new Dimension(100, 62));
+
+		multiplication = new JButton("x");
+	    multiplication.setPreferredSize(new Dimension(100, 62));
+
+		division = new JButton("Ã·");
+	    division.setPreferredSize(new Dimension(100, 62));		
+
+		annule = new JButton("C");
+	    annule.setPreferredSize(new Dimension(100, 62));
+
+	    operateurs.add(addition);
+	    operateurs.add(soustraction);
+	    operateurs.add(multiplication);
+	    operateurs.add(division);
+	    operateurs.add(annule);
+	    
+	    panEcran.add(nombreAffiche);
+	    panEcran.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+	    superConteneur.add(panEcran, BorderLayout.NORTH);
+	    superConteneur.add(chiffres, BorderLayout.CENTER);
+	    superConteneur.add(operateurs, BorderLayout.EAST);
+	    this.setContentPane(superConteneur);
+	}
 }

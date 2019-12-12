@@ -70,12 +70,11 @@ public class Calculatrice extends JFrame {
 
 	public Calculatrice() {
 		
-		this.setSize(500, 520);
+		this.setSize(480, 520);
 		this.setTitle("Calculatrice");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    this.setLocationRelativeTo(null);
 	    this.setResizable(false);
-	    this.setVisible(true);
 
 	    this.superConteneur = new JPanel();
 		this.chiffres = new JPanel();
@@ -84,13 +83,12 @@ public class Calculatrice extends JFrame {
 		
 	    this.chiffres.setPreferredSize(new Dimension(330, 450));
 		this.operateurs.setPreferredSize(new Dimension(110, 450));
-	    this.panEcran.setPreferredSize(new Dimension(440, 60));
+	    this.panEcran.setPreferredSize(new Dimension(400, 60));
 
 		
 		nombreAffiche = new JLabel("");
-		nombreAffiche.setPreferredSize(new Dimension(125, 100));
-		nombreAffiche.setHorizontalAlignment(JLabel.RIGHT);
-		nombreAffiche.setFont(new Font("Arial", Font.BOLD, 36));
+		nombreAffiche.setPreferredSize(new Dimension(100, 60));
+		nombreAffiche.setFont(new Font("Arial", Font.BOLD, 20));
 		
 		zero = new JButton("0");
 	    zero.setPreferredSize(new Dimension(100, 80));
@@ -169,6 +167,7 @@ public class Calculatrice extends JFrame {
 	    superConteneur.add(chiffres, BorderLayout.CENTER);
 	    superConteneur.add(operateurs, BorderLayout.EAST);
 	    this.setContentPane(superConteneur);
+	    this.setVisible(true);
 
 		zero.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {

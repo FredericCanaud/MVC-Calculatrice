@@ -2,22 +2,37 @@ package model;
 
 public class CalculatriceModele {
 	
-	private double premierNombre;
-	private double deuxiemeNombre;
 	
-	public double additionnerLesDeuxNombres() {
-		return this.premierNombre + this.deuxiemeNombre;
-	}
-	 
-	public double soutraireLesDeuxNombres() {
-		return this.premierNombre - this.deuxiemeNombre;
-	}
+	private String addString;
+	private String subString;
+	private String multiString;
+	private String divString;
+	private String finalString;
+	private double nombreAAdditionner;
+	private double nombreASoustraire;
+	private double nombreAMultiplier;
+	private double nombreADiviser;
+	private double nombreFinal;
+	private double resultat;
+	private String reponseEnChaine;
 	
-	public double multiplierLesDeuxNombres() {
-		return this.premierNombre + this.deuxiemeNombre;
+	public double additionner(double nombre1, double nombre2) {
+
+		return nombre1 + nombre2;
 	}
-	
-	public double diviserLesDeuxNombres() {
-		return this.premierNombre + this.deuxiemeNombre;
+
+	public double soustraire(double nombre1, double nombre2) {
+
+		return nombre1 - nombre2;
+	}
+
+	public double multiplier(double nombre1, double nombre2) {
+
+		return nombre1 * nombre2;
+	}
+
+	public double diviser(double nombre1, double nombre2) {
+
+		return nombre1 / nombre2;
 	}
 }
